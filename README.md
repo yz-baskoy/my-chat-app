@@ -31,10 +31,17 @@ php -S localhost:8000 -t public
 6. Visit http://localhost:8000 in your web browser to view the application.
 
 ## Usage
-* GET /users: List all users in the chat.
-* GET /messages/{recipient_id}: List all messages sent to a specific user.
 * POST /messages: Send a new message.
-* GET /users/{id}: Retrieve a specific user by ID.
+    * author_id: ID of the user sending the message
+    * recipient_id: ID of the user receiving the message
+    * content: The content of the message
+* GET /messages/{recipient_id}: List all messages sent to a specific user.
+* GET /users: List all users in the chat.
+* POST /users/register: registers a user with the provided name, email, and password.
+    * name
+    * email
+    * password
 
-
+## Author
+Yusuf Başköy
 
