@@ -1,0 +1,40 @@
+# Chat App
+
+This is a simple chat application built with PHP and the Slim microframework. The application allows users to engage in chat conversations with other users and view their messages.
+
+## Installation
+
+To install the application, follow these steps:
+
+1. Clone the Git repository to your local machine:
+
+```bash
+git clone https://github.com/yz-baskoy/my-chat-app
+```
+2. Install the dependencies using Composer:
+```bash
+cd chat-app
+composer install
+```
+3. Create a new SQLite database file:
+```bash
+touch chat.db
+```
+4. Initialize the database schema using the included SQL script:
+```bash
+sqlite3 chat.db < schema.sql
+```
+5. Start the development server:
+```bash
+php -S localhost:8000 -t public
+```
+6. Visit http://localhost:8000 in your web browser to view the application.
+
+## Usage
+* GET /users: List all users in the chat.
+* GET /messages/{recipient_id}: List all messages sent to a specific user.
+* POST /messages: Send a new message.
+* GET /users/{id}: Retrieve a specific user by ID.
+
+
+
