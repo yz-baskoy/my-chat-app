@@ -1,0 +1,19 @@
+# Ignore vendor directory
+/vendor
+
+# Ignore SQLite database file
+/chat.db
+
+# Ignore IDE and editor files
+.vscode
+.idea
+*.sublime-*
+
+# Ignore logs and cache files
+/logs
+/cache
+
+# Ignore environment configuration files
+.env
+.env.*
+

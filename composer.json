@@ -1,0 +1,20 @@
+{
+    "name": "yzb/chat-app",
+    "autoload": {
+        "psr-4": {
+            "Yzb\\ChatApp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "yz-baskoy",
+            "email": "yziyabaskoy@gmail.com"
+        }
+    ],
+    "require": {
+        "slim/slim": "^4.11",
+        "nyholm/psr7": "^1.5",
+        "nyholm/psr7-server": "^1.0",
+        "guzzlehttp/psr7": "^2"
+    }
+}
