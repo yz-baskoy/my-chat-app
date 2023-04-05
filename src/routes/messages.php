@@ -41,3 +41,23 @@ $app->get('/messages/{recipient_id}', function (Request $request, Response $resp
     $response->getBody()->write(json_encode($messages));
     return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
 });
+
+// Get new messages
+$app->get('/messages/new', function (Request $request, Response $response) {
+    // Get the latest message ID from the request query parameters
+    $lastMessageId = $request->getQueryParams()['lastMessageId'] ?? 0;
+
+    // Query the database for new messages
+    $db = new PDO('sqlite:chat.db');
+    $stmt = $db->prepare('SELECT * FROM messages WHERE id > :lastMessageId');
+    $stmt->execute(['lastMessageId' => $lastMessageId]);
+    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Return the messages or a message indicating that there are no new messages
+    if (count($messages) > 0) {
+        return $response->getBody()->write(json_encode($messages));
+    } else {
+        return $response->withStatus(204)->getBody()->write('No new messages');
+    }
+});
+
