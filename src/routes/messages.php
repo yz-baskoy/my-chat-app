@@ -4,9 +4,6 @@ require 'vendor/autoload.php';
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
-
-//$app = AppFactory::create();
 
 // Send a message
 $app->post('/messages', function (Request $request, Response $response) {
@@ -43,12 +40,12 @@ $app->get('/messages/{recipient_id}', function (Request $request, Response $resp
 });
 
 // Get new messages
-$app->get('/messages/new', function (Request $request, Response $response) {
+$app->get('/new-messages', function (Request $request, Response $response) {
     $timestamp = $request->getQueryParams()['timestamp'] ?? 0;
     $db = new PDO('sqlite:chat.db');
 
     $messages = [];
-    $query = "SELECT * FROM messages WHERE created_at > :timestamp ORDER BY created_at ASC";
+    $query = "SELECT * FROM messages WHERE datetime(timestamp) < datetime(:timestamp, 'unixepoch') ORDER BY timestamp ASC";
     $stmt = $db->prepare($query);
     $stmt->execute(['timestamp' => $timestamp]);
 
@@ -58,6 +55,7 @@ $app->get('/messages/new', function (Request $request, Response $response) {
 
     if (count($messages) > 0) {
         $response->getBody()->write(json_encode($messages));
+        $response->withStatus(200, "You have new messages");
     } else {
         $response->getBody()->write("No new messages.");
     }
