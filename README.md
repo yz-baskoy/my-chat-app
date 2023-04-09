@@ -36,6 +36,7 @@ php -S localhost:8000 -t public
     * recipient_id: ID of the user receiving the message
     * content: The content of the message
 * GET /messages/{recipient_id}: List all messages sent to a specific user.
+* GET /new-messages: returns JSON data containing all messages that were sent after the specified timestamp.
 * GET /users: List all users in the chat.
 * POST /users/register: registers a user with the provided name, email, and password.
     * name
